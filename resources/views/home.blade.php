@@ -30,6 +30,22 @@
         </x-slot:carouselIndicators>
     </x-carousel>
 
+    <header class="px-8 md:px-16 py-16 mx-auto space-y-16 bg-gray-50">
+        <h4
+            class="text-3xl text-center font-semibold after:ml-0.5 relative after:text-red-500 after:content-[''] after:absolute after:start-1/2 after:-translate-x-1/2 after:border after:border-black after:w-32 after:-bottom-5">
+            Tentang Dusun Cremo
+        </h4>
+        <figure class="md:grid md:grid-cols-2 md:gap-12 flex-col flex gap-6">
+            <img src="{{ Vite::asset('resources/images/sliders/slider-1.jpeg') }}" alt="cremo village image">
+            <figcaption class="space-y-3">
+                <h5 class="font-semibold text-lg">Dusun dengan Dataran Tertinggi di Gunungkidul</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis omnis error nihil asperiores quaerat
+                    rerum porro consequuntur quasi odio necessitatibus, cumque impedit a sit id autem accusamus saepe
+                    minima beatae!</p>
+            </figcaption>
+        </figure>
+    </header>
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
 </body>
 
