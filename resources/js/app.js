@@ -1,6 +1,9 @@
-import './bootstrap';
+import "flowbite";
+import "./bootstrap";
+import "../css/app.css";
 
-import Alpine from 'alpinejs';
+import.meta.glob(["../images/**", "../fonts/**"]);
+import Alpine from "alpinejs";
 
 window.Alpine = Alpine;
 
