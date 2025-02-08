@@ -10,56 +10,68 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-const cremocarousel = document.getElementById("cremo-carousel");
+function startCarousel() {
+    const carouselItems = [
+        {
+            position: 0,
+            el: document.getElementById("cremo-carousel-item-1"),
+        },
+        {
+            position: 1,
+            el: document.getElementById("cremo-carousel-item-2"),
+        },
+        {
+            position: 2,
+            el: document.getElementById("cremo-carousel-item-3"),
+        },
+    ];
 
-const items = [
-    {
-        position: 0,
-        el: document.getElementById("cremo-carousel-item-1"),
-    },
-    {
-        position: 1,
-        el: document.getElementById("cremo-carousel-item-2"),
-    },
-    {
-        position: 2,
-        el: document.getElementById("cremo-carousel-item-3"),
-    },
-];
+    const carouselIndicators = [
+        {
+            position: 0,
+            el: document.getElementById("cremo-carousel-indicator-1"),
+        },
+        {
+            position: 1,
+            el: document.getElementById("cremo-carousel-indicator-2"),
+        },
+        {
+            position: 2,
+            el: document.getElementById("cremo-carousel-indicator-3"),
+        },
+    ];
 
-const indicators = [
-    {
-        position: 0,
-        el: document.getElementById("cremo-carousel-indicator-1"),
-    },
-    {
-        position: 1,
-        el: document.getElementById("cremo-carousel-indicator-2"),
-    },
-    {
-        position: 2,
-        el: document.getElementById("cremo-carousel-indicator-3"),
-    },
-];
+    const options = {
+        defaultPosition: 0,
+        interval: 3000,
 
-const options = {
-    defaultPosition: 0,
-    interval: 3000,
+        indicators: {
+            activeClasses: "bg-green-300",
+            inactiveClasses: "bg-white",
+            items: carouselIndicators,
+        },
+    };
 
-    indicators: {
-        activeClasses: "bg-green-300",
-        inactiveClasses: "bg-white",
-        items: indicators,
-    },
-};
+    const instanceOptions = {
+        id: "cremo-carousel",
+        override: true,
+    };
 
-// instance options object
-const instanceOptions = {
-    id: "cremo-carousel",
-    override: true,
-};
+    const carousel = new Carousel(
+        cremoCarousel,
+        carouselItems,
+        options,
+        instanceOptions,
+    );
 
-const carousel = new Carousel(cremocarousel, items, options, instanceOptions);
+    carousel.cycle();
+}
+
+const cremoCarousel = document.getElementById("cremo-carousel");
+
+if (cremoCarousel) {
+    startCarousel();
+}
 
 const carouselPrevButton = document.getElementById("cremo-carousel-prev");
 const carouselNextButton = document.getElementById("cremo-carousel-next");
