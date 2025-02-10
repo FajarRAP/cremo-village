@@ -4,10 +4,12 @@ import "../css/app.css";
 
 import.meta.glob(["../images/**", "../fonts/**"]);
 import Alpine from "alpinejs";
+import intersect from "@alpinejs/intersect";
 import { Carousel } from "flowbite";
 
 window.Alpine = Alpine;
 
+Alpine.plugin(intersect);
 Alpine.start();
 
 function startCarousel() {
