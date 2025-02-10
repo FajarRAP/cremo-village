@@ -44,6 +44,7 @@
         </figure>
     </header>
 
+    {{-- Statistics --}}
     <section
         class="bg-gray-900 text-center text-xl md:text-2xl text-green-400 py-12 md:py-16 font-semibold md:grid md:grid-cols-2 flex flex-col gap-12">
         <x-text-statistic number="21:9" text="Perbandingan Laki-laki dan Perempuan" />
@@ -52,16 +53,76 @@
         <x-text-statistic number="1000" text="Jumlah Penduduk" />
     </section>
 
+    {{-- Administration Information --}}
+    <section class="px-8 md:px-32 py-16">
+        <x-section-heading text="Informasi Administrasi" />
+
+        <div class="border border-gray-300 first:rounded-t last:rounded-b group mt-16" x-data="{ expanded: false }">
+            <button type="button"
+                class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
+                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
+                <span>Surat Keterangan Meninggal</span>
+                <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
+                    x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
+            </button>
+            <div class="py-5 border border-gray-300" x-show="expanded">
+                <ol class="list-decimal ms-7">
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="border border-gray-300 first:rounded-t last:rounded-b group" x-data="{ expanded: false }">
+            <button type="button"
+                class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
+                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
+                <span>Surat Keterangan Meninggal</span>
+                <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
+                    x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
+            </button>
+            <div class="py-5 border border-gray-300" x-show="expanded">
+                <ol class="list-decimal ms-7">
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                </ol>
+            </div>
+        </div>
+        <div class="border border-gray-300 first:rounded-t last:rounded-b group" x-data="{ expanded: false }">
+            <button type="button"
+                class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
+                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
+                <span>Surat Keterangan Meninggal</span>
+                <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
+                    x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
+            </button>
+            <div class="py-5 border border-gray-300" x-show="expanded">
+                <ol class="list-decimal ms-7">
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
     {{-- Stakeholders --}}
     <section class="px-8 md:px-32 py-16 space-y-16">
         <x-section-heading text="Pejabat Dusun Cremo" />
         <div class="md:grid md:grid-cols-4 md:gap-12 flex flex-col gap-6">
             <x-person-card name="Heru" position="Kepala Dusun" asset="stakeholder-1.jpg" />
-            <x-person-card name="Heru" position="RW 04" asset="stakeholder-1.jpg" />
-            <x-person-card name="Heru" position="RT 01" asset="stakeholder-1.jpg" />
-            <x-person-card name="Heru" position="RT 02" asset="stakeholder-1.jpg" />
-            <x-person-card name="Heru" position="RT 03" asset="stakeholder-1.jpg" />
-            <x-person-card name="Heru" position="RT 04" asset="stakeholder-1.jpg" />
+            <x-person-card name="Cipto Widodo" position="RW 04" asset="stakeholder-1.jpg" />
+            <x-person-card name="Sajimin" position="RT 01" asset="stakeholder-1.jpg" />
+            <x-person-card name="Pujana" position="RT 02" asset="stakeholder-1.jpg" />
+            <x-person-card name="Samidi" position="RT 03" asset="stakeholder-1.jpg" />
+            <x-person-card name="Suhada" position="RT 04" asset="stakeholder-1.jpg" />
             <x-person-card name="Isanto" position="RT 05" asset="stakeholder-1.jpg" />
         </div>
     </section>
@@ -105,8 +166,6 @@
             </a>
         </p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.js"></script>
 </body>
 
 </html>
