@@ -113,6 +113,26 @@
         </div>
     </section>
 
+    {{-- Vision Mission --}}
+    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50">
+        <x-section-heading text="Visi dan Misi" />
+        <div class="grid md:grid-cols-2 gap-8" x-data="{ show: false }" x-intersect:enter="show = true"
+            x-intersect:leave="show = false">
+            <x-goal-card text="Visi">
+                <p class="text-gray-700 leading-relaxed">
+                    Menjadi dusun yang mandiri, inovatif, dan sejahtera dengan berbasis teknologi dan kearifan lokal.
+                </p>
+            </x-goal-card>
+            <x-goal-card text="Misi" class="delay-200">
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>Mengembangkan potensi lokal dengan berbasis teknologi.</li>
+                    <li>Meningkatkan kesejahteraan masyarakat melalui edukasi dan pemberdayaan.</li>
+                    <li>Menjaga kelestarian lingkungan dan budaya.</li>
+                </ul>
+            </x-goal-card>
+        </div>
+    </section>
+
     {{-- Stakeholders --}}
     <section class="px-8 md:px-32 py-16 space-y-16">
         <x-section-heading text="Pejabat Dusun Cremo" />
