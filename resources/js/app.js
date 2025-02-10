@@ -43,7 +43,7 @@ function startCarousel() {
 
     const options = {
         defaultPosition: 0,
-        interval: 3000,
+        interval: 8000,
 
         indicators: {
             activeClasses: "bg-green-300",
@@ -65,6 +65,12 @@ function startCarousel() {
     );
 
     carousel.cycle();
+
+    const carouselPrevButton = document.getElementById("cremo-carousel-prev");
+    const carouselNextButton = document.getElementById("cremo-carousel-next");
+
+    carouselPrevButton.addEventListener("click", () => carousel.prev());
+    carouselNextButton.addEventListener("click", () => carousel.next());
 }
 
 const cremoCarousel = document.getElementById("cremo-carousel");
@@ -72,9 +78,3 @@ const cremoCarousel = document.getElementById("cremo-carousel");
 if (cremoCarousel) {
     startCarousel();
 }
-
-const carouselPrevButton = document.getElementById("cremo-carousel-prev");
-const carouselNextButton = document.getElementById("cremo-carousel-next");
-
-carouselPrevButton.addEventListener("click", () => carousel.prev());
-carouselNextButton.addEventListener("click", () => carousel.next());
