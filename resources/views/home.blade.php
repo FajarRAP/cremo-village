@@ -57,7 +57,7 @@
     <section class="px-8 md:px-32 py-16">
         <x-section-heading text="Informasi Administrasi" />
 
-        <div class="border border-gray-300 first:rounded-t last:rounded-b group mt-16" x-data="{ expanded: false }">
+        <div class="border border-gray-300 group mt-16" x-data="{ expanded: false }">
             <button type="button"
                 class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
                 x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
@@ -75,7 +75,7 @@
                 </ol>
             </div>
         </div>
-        <div class="border border-gray-300 first:rounded-t last:rounded-b group" x-data="{ expanded: false }">
+        <div class="border border-gray-300 group" x-data="{ expanded: false }">
             <button type="button"
                 class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
                 x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
@@ -93,7 +93,7 @@
                 </ol>
             </div>
         </div>
-        <div class="border border-gray-300 first:rounded-t last:rounded-b group" x-data="{ expanded: false }">
+        <div class="border border-gray-300 group" x-data="{ expanded: false }">
             <button type="button"
                 class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
                 x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
@@ -144,6 +144,20 @@
             <x-person-card name="Samidi" position="RT 03" asset="stakeholder-1.jpg" />
             <x-person-card name="Suhada" position="RT 04" asset="stakeholder-1.jpg" />
             <x-person-card name="Isanto" position="RT 05" asset="stakeholder-1.jpg" />
+        </div>
+    </section>
+
+    {{-- Village Assets --}}
+    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50">
+        <x-section-heading text="Aset Dusun" />
+        <div class="grid md:grid-cols-3 gap-8">
+            <x-village-asset-item title="Traktor" description="Digunakan oleh petani untuk mengolah lahan pertanian."
+                asset="stakeholders/stakeholder-1.jpg" />
+            <x-village-asset-item title="Gedung Serbaguna" description="Tempat pertemuan warga dan kegiatan dusun."
+                asset="stakeholders/stakeholder-1.jpg" />
+            <x-village-asset-item title="Perpustakaan Desa"
+                description="Menyediakan buku dan akses internet bagi warga."
+                asset="stakeholders/stakeholder-1.jpg" />
         </div>
     </section>
 
