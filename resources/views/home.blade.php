@@ -15,7 +15,10 @@
     @vite('resources/js/app.js')
 </head>
 
-<body>
+<body class="relative">
+    {{-- Navigation Bar --}}
+    <x-navbar />
+
     {{-- Carousel --}}
     <x-carousel>
         <x-slot:carouselItems>
@@ -31,7 +34,7 @@
     </x-carousel>
 
     {{-- About --}}
-    <header class="px-8 md:px-16 py-16 space-y-16 bg-gray-50">
+    <header class="px-8 md:px-16 py-16 space-y-16 bg-gray-50" id="about">
         <x-section-heading text="Tentang Dusun Cremo" />
         <figure class="md:grid md:grid-cols-2 md:gap-12 flex-col flex gap-6">
             <img src="{{ Vite::asset('resources/images/sliders/slider-1.jpeg') }}" alt="cremo village image">
@@ -54,7 +57,7 @@
     </section>
 
     {{-- Administration Information --}}
-    <section class="px-8 md:px-32 py-16">
+    <section class="px-8 md:px-32 py-16" id="information">
         <x-section-heading text="Informasi Administrasi" />
 
         <div class="border border-gray-300 group mt-16" x-data="{ expanded: false }">
@@ -114,7 +117,7 @@
     </section>
 
     {{-- Vision Mission --}}
-    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50">
+    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50" id="vision">
         <x-section-heading text="Visi dan Misi" />
         <div class="grid md:grid-cols-2 gap-8" x-data="{ show: false }" x-intersect:enter="show = true"
             x-intersect:leave="show = false">
@@ -134,7 +137,7 @@
     </section>
 
     {{-- Stakeholders --}}
-    <section class="px-8 md:px-32 py-16 space-y-16">
+    <section class="px-8 md:px-32 py-16 space-y-16" id="stakeholders">
         <x-section-heading text="Pejabat Dusun Cremo" />
         <div class="md:grid md:grid-cols-4 md:gap-12 flex flex-col gap-6">
             <x-person-card name="Heru" position="Kepala Dusun" asset="stakeholder-1.jpg" />
@@ -148,7 +151,7 @@
     </section>
 
     {{-- Village Assets --}}
-    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50">
+    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50" id="assets">
         <x-section-heading text="Aset Dusun" />
         <div class="grid md:grid-cols-3 gap-8">
             <x-village-asset-item title="Traktor" description="Digunakan oleh petani untuk mengolah lahan pertanian."
@@ -161,12 +164,13 @@
         </div>
     </section>
 
+    {{-- Message --}}
     <section class="bg-green-400 text-center text-xl md:text-3xl text-white py-8 md:py-12 font-semibold">
         <h4>Ditunggu kedatangannya di Dusun Cremo</h4>
     </section>
 
     {{-- Contact Us --}}
-    <section class="px-8 md:px-32 py-16 space-y-16">
+    <section class="px-8 md:px-32 py-16 space-y-16" id="contact">
         <x-section-heading text="Kontak Kami" />
         <div class="md:grid md:grid-cols-2 md:gap-24 flex flex-col gap-6">
             <iframe
@@ -200,6 +204,13 @@
             </a>
         </p>
     </footer>
+
+    {{-- Arrow Up --}}
+    <div class="fixed md:bottom-24 md:right-24 bottom-8 right-8" id="arrow-up">
+        <button type="button" class="bg-green-400 p-3 rounded-full">
+            <x-svgs.arrow-right class="-rotate-90 text-white" />
+        </button>
+    </div>
 </body>
 
 </html>
