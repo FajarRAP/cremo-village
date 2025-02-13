@@ -17,10 +17,10 @@
 </head>
 
 <body class="font-sans antialiased text-gray-900">
-    <div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0">
+    <div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0 gap-6">
         <div>
-            <a href="/">
-                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+            <a href="{{ route('home') }}">
+                <x-section-heading text="Dusun Cremo" />
             </a>
         </div>
 
