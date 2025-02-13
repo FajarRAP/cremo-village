@@ -12,7 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.1/dist/flowbite.min.css" rel="stylesheet" />
 
-    @vite('resources/js/app.js')
+    @vite(['resources/js/app.js', 'resources/js/home.js'])
 </head>
 
 <body class="relative">
