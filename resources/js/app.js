@@ -81,15 +81,7 @@ if (cremoCarousel) {
     startCarousel();
 }
 
-document.getElementById("cremo-carousel").scrollIntoView();
-document.getElementById("about").scrollIntoView();
-document.getElementById("information").scrollIntoView();
-document.getElementById("vision").scrollIntoView();
-document.getElementById("stakeholders").scrollIntoView();
-document.getElementById("assets").scrollIntoView();
-document.getElementById("contact").scrollIntoView();
-document
-    .getElementById("arrow-up")
-    .addEventListener("click", () =>
-        document.getElementById("navbar").scrollIntoView(),
-    );
+const arrowUp = document.getElementById("arrow-up");
+arrowUp.addEventListener("click", () =>
+    document.getElementById("navbar").scrollIntoView(),
+);
