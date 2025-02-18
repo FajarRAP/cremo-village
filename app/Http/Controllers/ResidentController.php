@@ -10,7 +10,7 @@ class ResidentController extends Controller
 
     public function index()
     {
-        return view('dashboard.resident-records', [
+        return view('dashboard.resident-records.index', [
             'residents' => Resident::paginate(10),
         ]);
     }
@@ -46,6 +46,13 @@ class ResidentController extends Controller
         ]);
 
         $resident->update($validated);
+
+        return redirect(route('dashboard.resident-records', absolute: false));
+    }
+
+    public function delete(Resident $resident)
+    {
+        $resident->delete();
 
         return redirect(route('dashboard.resident-records', absolute: false));
     }
