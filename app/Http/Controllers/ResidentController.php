@@ -8,10 +8,24 @@ use Illuminate\Http\Request;
 class ResidentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $residents = Resident::query();
+
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $residents->where('name', 'like', "%$keyword%");
+        }
+
         return view('dashboard.resident-records.index', [
-            'residents' => Resident::paginate(10),
+            'residents' => $residents->paginate(10)
+        ]);
+    }
+
+    public function edit(Resident $resident)
+    {
+        return view('dashboard.resident-records.edit', [
+            'resident' => $resident
         ]);
     }
 
@@ -27,13 +41,6 @@ class ResidentController extends Controller
         Resident::create($validated);
 
         return redirect(route('dashboard.resident-records', absolute: false));
-    }
-
-    public function edit(Resident $resident)
-    {
-        return view('dashboard.resident-records.edit', [
-            'resident' => $resident,
-        ]);
     }
 
     public function update(Request $request, Resident $resident)
