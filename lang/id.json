@@ -22,5 +22,9 @@
     "Origin": "Asal",
     "Date": "Tanggal",
     "Purpose": "Tujuan",
-    "Description": "Keterangan"
+    "Description": "Keterangan",
+    "Birth Date": "Tanggal Lahir",
+    "Read more": "Selengkapnya",
+    "Location": "Lokasi",
+    "Title": "Judul"
 }
