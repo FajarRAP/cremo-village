@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\ProfileController;
@@ -27,8 +28,15 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function ()
         Route::delete('/guest-book/{guestbook}', 'delete')->name('guest-book.delete');
     });
 
+    Route::controller(AgendaController::class)->group(function () {
+        Route::get('/agenda', 'index')->name('dashboard.agendas');
+        Route::get('/agenda/{agenda}/edit', 'edit')->name('agenda.edit');
+        Route::post('/agenda', 'store')->name('agenda.store');
+        Route::put('/agenda/{agenda}', 'update')->name('agenda.update');
+        Route::delete('/agenda/{agenda}', 'delete')->name('agenda.delete');
+    });
+
     Route::get('/news', fn() => view('dashboard.news'))->name('dashboard.news');
-    Route::get('/agendas', fn() => view('dashboard.agendas'))->name('dashboard.agendas');
 });
 
 Route::middleware('auth')->group(function () {
