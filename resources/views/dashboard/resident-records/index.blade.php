@@ -30,10 +30,10 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                             <tr>
                                 <th scope="col" class="px-4 py-4">#</th>
-                                <th scope="col" class="px-4 py-4">Nama</th>
-                                <th scope="col" class="px-4 py-3">Tanggal Lahir</th>
-                                <th scope="col" class="px-4 py-3">RT</th>
-                                <th scope="col" class="px-4 py-3">RW</th>
+                                <th scope="col" class="px-4 py-4">{{ __('Name') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Birth Date') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('RT') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('RW') }}</th>
                                 <th scope="col" class="px-4 py-3"></th>
                             </tr>
                         </thead>
