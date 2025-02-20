@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ResidentSeeder::class,
             GuestBookSeeder::class,
+            AgendaSeeder::class,
         ]);
     }
 }
