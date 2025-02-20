@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResidentController;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => view('home'))->name('home');
 
 Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', fn() => view('dashboard.dashboard'))->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
 
     Route::controller(ResidentController::class)->group(function () {
         Route::get('/resident-records', 'index')->name('dashboard.resident-records');
