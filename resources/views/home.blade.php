@@ -21,23 +21,27 @@
 
     {{-- Carousel --}}
     <x-carousel>
-        <x-slot:carouselItems>
-            <x-carousel.item title="Masjid Al Hidayah" asset="slider-1.jpeg" id="cremo-carousel-item-1" />
-            <x-carousel.item title="Curug Tegalrejo" asset="slider-2.jpeg" id="cremo-carousel-item-2" />
-            <x-carousel.item title="SDN Prengguk II" asset="slider-3.jpeg" id="cremo-carousel-item-3" />
-        </x-slot:carouselItems>
-        <x-slot:carouselIndicators>
+        <x-slot:carousel-items>
+            <x-carousel.item title="Masjid Al Hidayah" asset="slider-1.jpg" id="cremo-carousel-item-1" />
+            <x-carousel.item title="Balai Dusun" asset="slider-2.jpg" id="cremo-carousel-item-2" />
+            <x-carousel.item title="Lapangan Voli" asset="slider-3.jpg" id="cremo-carousel-item-3" />
+        </x-slot:carousel-items>
+        <x-slot:carousel-indicators>
             <x-carousel.indicator id="cremo-carousel-indicator-1" />
             <x-carousel.indicator id="cremo-carousel-indicator-2" />
             <x-carousel.indicator id="cremo-carousel-indicator-3" />
-        </x-slot:carouselIndicators>
+        </x-slot:carousel-indicators>
     </x-carousel>
 
     {{-- About --}}
     <header class="px-8 md:px-16 py-16 space-y-16 bg-gray-50" id="about">
         <x-section-heading text="Tentang Dusun Cremo" />
         <figure class="md:grid md:grid-cols-2 md:gap-12 flex-col flex gap-6">
-            <img src="{{ Vite::asset('resources/images/sliders/slider-1.jpeg') }}" alt="cremo village image">
+            <iframe src="https://www.youtube.com/embed/LODiq1N_H0k?si=3QRGupl7FRz2RQKp" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" class="w-full h-50 md:h-88 rounded"
+                allowfullscreen></iframe>
             <figcaption class="space-y-3">
                 <h5 class="font-semibold text-lg">Dusun dengan Dataran Tertinggi di Gunungkidul</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis omnis error nihil asperiores quaerat
@@ -50,10 +54,10 @@
     {{-- Statistics --}}
     <section
         class="bg-gray-900 text-center text-xl md:text-2xl text-green-400 py-12 md:py-16 font-semibold md:grid md:grid-cols-2 flex flex-col gap-12">
-        <x-text-statistic number="21:9" text="Perbandingan Laki-laki dan Perempuan" />
-        <x-text-statistic number="500" text="Penduduk Laki-laki" />
-        <x-text-statistic number="500" text="Penduduk Perempuan" />
-        <x-text-statistic number="1000" text="Jumlah Penduduk" />
+        <x-text-statistic :number="$ratio" text="Perbandingan Laki-laki dan Perempuan" />
+        <x-text-statistic :number="$male_count" text="Penduduk Laki-laki" />
+        <x-text-statistic :number="$female_count" text="Penduduk Perempuan" />
+        <x-text-statistic :number="$resident_count" text="Jumlah Penduduk" />
     </section>
 
     {{-- Administration Information --}}
@@ -63,48 +67,13 @@
         <div class="border border-gray-300 group mt-16" x-data="{ expanded: false }">
             <button type="button"
                 class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
-                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
+                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'"
+                x-on:click="expanded = !expanded">
                 <span>Surat Keterangan Meninggal</span>
                 <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
                     x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
             </button>
-            <div class="py-5 border border-gray-300" x-show="expanded">
-                <ol class="list-decimal ms-7">
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                </ol>
-            </div>
-        </div>
-        <div class="border border-gray-300 group" x-data="{ expanded: false }">
-            <button type="button"
-                class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
-                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
-                <span>Surat Keterangan Meninggal</span>
-                <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
-                    x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
-            </button>
-            <div class="py-5 border border-gray-300" x-show="expanded">
-                <ol class="list-decimal ms-7">
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                </ol>
-            </div>
-        </div>
-        <div class="border border-gray-300 group" x-data="{ expanded: false }">
-            <button type="button"
-                class="flex items-center justify-between w-full p-4 font-medium rtl:text-right hover:bg-green-200 focus:ring-2 focus:ring-inset-4 focus:ring-green-400"
-                x-bind:class="expanded ? 'bg-green-200 text-green-800' : 'text-gray-500'" @click="expanded = !expanded">
-                <span>Surat Keterangan Meninggal</span>
-                <x-svgs.arrow-right class="transition-all duration-300 ease-in-out"
-                    x-bind:class="expanded ? '!text-green-800 -rotate-90' : '!text-gray-500 rotate-90'" />
-            </button>
-            <div class="py-5 border border-gray-300" x-show="expanded">
+            <div class="py-5 border border-gray-300" x-show="expanded" x-collapse>
                 <ol class="list-decimal ms-7">
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li>Lorem ipsum dolor sit amet.</li>
@@ -162,6 +131,20 @@
                 description="Menyediakan buku dan akses internet bagi warga."
                 asset="stakeholders/stakeholder-1.jpg" />
         </div>
+    </section>
+
+    {{-- Upcoming Events --}}
+    <section class="px-8 md:px-32 py-16 space-y-16 bg-gray-50" id="assets">
+        <x-section-heading text="Agenda Terdekat" />
+        @if ($agendas->isEmpty())
+            <p class="text-center text-gray-500">Tidak ada agenda terdekat.</p>
+        @else
+            <div class="grid md:grid-cols-2 gap-8">
+                @foreach ($agendas as $agenda)
+                    <x-agenda-card :$agenda />
+                @endforeach
+            </div>
+        @endif
     </section>
 
     {{-- Message --}}
