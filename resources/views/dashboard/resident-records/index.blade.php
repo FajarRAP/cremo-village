@@ -17,9 +17,9 @@
                     </div>
                     <div
                         class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <button type="button" id="createProductModalButton" data-modal-target="createProductModal"
-                            data-modal-toggle="createProductModal"
-                            class="flex items-center justify-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2">
+                        <button type="button"
+                            class="flex items-center justify-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2"
+                            x-data="" x-on:click="$dispatch('open-modal', 'add-resident-record')">
                             <x-svgs.plus class="w-3.5 mr-2 fill-white" />
                             {{ __('Add') . ' ' . __('Resident Records') }}
                         </button>
@@ -39,7 +39,7 @@
                         </thead>
                         <tbody>
                             @foreach ($residents as $resident)
-                                <tr class="border-b ">
+                                <tr class="border-b">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $loop->index + 1 }}
                                     </th>
@@ -47,34 +47,36 @@
                                     <td class="px-4 py-3">{{ date_format($resident->birth_date, 'd/m/o') }}</td>
                                     <td class="px-4 py-3">{{ $resident->rt }}</td>
                                     <td class="px-4 py-3">{{ $resident->rw }}</td>
-                                    <td class="px-4 py-3 md:flex items-center justify-end">
-                                        <button data-dropdown-toggle="{{ $loop->index }}"
-                                            class="inline-flex items-center text-sm font-medium px-1 rounded transition duration-200 hover:bg-gray-100"
-                                            type="button">
-                                            <x-svgs.ellipsis />
-                                        </button>
-                                        <div id="{{ $loop->index }}"
-                                            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow">
-                                            <ul class="py-1 text-sm">
-                                                <li>
-                                                    <a href="{{ route('resident.edit', ['resident' => $resident->id]) }}"
-                                                        class="flex w-full items-center py-2 px-4 hover:bg-gray-100">
-                                                        <x-svgs.pen-to-square class="mr-2 fill-gray-500" />
-                                                        {{ __('Edit') }}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <button type="button" data-modal-target="readProductModal"
-                                                        data-modal-toggle="readProductModal"
-                                                        class="flex w-full items-center py-2 px-4 hover:bg-gray-100"
-                                                        x-on:click="resident = {{ json_encode($resident) }}">
-                                                        <x-svgs.eye class="mr-2 fill-gray-500" />
-                                                        {{ __('Preview') }}
-                                                    </button>
-                                                </li>
-
-                                            </ul>
-                                        </div>
+                                    <td class="px-4 py-3">
+                                        <x-dropdown>
+                                            <x-slot name="trigger">
+                                                <button
+                                                    class="inline-flex items-center text-sm font-medium px-1 rounded transition duration-200 hover:bg-gray-100"
+                                                    type="button">
+                                                    <x-svgs.ellipsis />
+                                                </button>
+                                            </x-slot>
+                                            <x-slot name="content">
+                                                <ul class="py-1 text-sm">
+                                                    <li>
+                                                        <x-dropdown-link class="!flex items-center !text-gray-500"
+                                                            :href="route('resident.edit', [
+                                                                'resident' => $resident,
+                                                            ])">
+                                                            <x-svgs.pen-to-square class="mr-2 fill-gray-500" />
+                                                            {{ __('Edit') }}
+                                                        </x-dropdown-link>
+                                                    </li>
+                                                    <li class="hover:cursor-pointer">
+                                                        <x-dropdown-link class="!flex items-center !text-gray-500"
+                                                            x-on:click="resident = {{ json_encode($resident) }}; $dispatch('open-modal', 'preview-resident-record')">
+                                                            <x-svgs.eye class="mr-2 fill-gray-500" />
+                                                            {{ __('Preview') }}
+                                                        </x-dropdown-link>
+                                                    </li>
+                                                </ul>
+                                            </x-slot>
+                                        </x-dropdown>
                                     </td>
                                 </tr>
                             @endforeach
@@ -86,83 +88,88 @@
             </div>
         </div>
 
-        <div id="createProductModal"
-            class="hidden overflow-y-auto bg-gray-900/40 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-screen max-h-full">
-            <div class="relative p-4 w-full max-w-2xl max-h-full">
-                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
+        <x-modal name="add-resident-record" :show="$errors->storeResident->isNotEmpty()" focusable>
+            <form action="{{ route('resident.store') }}" method="POST" class="text-left">
+                @csrf
+                @method('POST')
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-4">
                     <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
                         <h3 class="text-lg font-semibold text-gray-900 Product">
                             {{ __('Add') . ' ' . __('Resident Records') }}</h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                            data-modal-target="createProductModal" data-modal-toggle="createProductModal">
-                            <x-svgs.xmark />
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                            <x-svgs.xmark x-on:click="$dispatch('close-modal', 'add-resident-record')" />
                         </button>
                     </div>
-                    <form action="{{ route('resident.store') }}" method="POST">
-                        @csrf
-                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                            <div>
-                                <x-input-label for="name" class="mb-2" value="Name" />
-                                <x-text-input id="name" name="name" class="w-full" />
-                            </div>
-                            <div>
-                                <x-input-label for="birth_date" class="mb-2" value="Tanggal Lahir (YYYY-MM-DD)" />
-                                <x-text-input id="birth_date" name="birth_date" class="w-full" />
-                            </div>
-                            <div>
-                                <x-input-label for="rt" class="mb-2" value="RT" />
-                                <x-text-input id="rt" name="rt" class="w-full" />
-                            </div>
-                            <div>
-                                <x-input-label for="rw" class="mb-2" value="RW" />
-                                <x-text-input id="rw" name="rw" class="w-full" />
-                            </div>
-                        </div>
-                        <button type="submit"
-                            class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                            <x-svgs.plus class="mr-2 fill-white" />
-                            {{ __('Add') }}
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="readProductModal"
-            class="hidden overflow-y-auto bg-gray-900/40 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-screen max-h-full">
-            <div class="relative p-4 w-full max-w-xl max-h-full">
-                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
-                    <div class="flex justify-between mb-4 rounded-t sm:mb-5">
-                        <div class="text-lg text-gray-900 md:text-xl ">
-                            <h3 class="font-semibold ">Apple iMac 27”</h3>
-                            <p class="font-bold">$2999</p>
+                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                        <div>
+                            <x-input-label for="name" class="mb-2" :value="__('Name')" />
+                            <x-text-input id="name" name="name" class="w-full" />
+                            <x-input-error :messages="$errors->storeResident->get('name')" class="mt-1" />
                         </div>
                         <div>
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex "
-                                data-modal-toggle="readProductModal">
-                                <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
+                            <x-input-label for="birth_date" class="mb-2" :value="__('Birth Date')" />
+                            <x-text-input id="birth_date" name="birth_date" class="w-full" type="date" />
+                            <x-input-error :messages="$errors->storeResident->get('birth_date')" class="mt-1" />
+                        </div>
+                        <div>
+                            <x-input-label for="rt" class="mb-2" :value="__('RT')" />
+                            <x-text-input id="rt" name="rt" class="w-full" />
+                            <x-input-error :messages="$errors->storeResident->get('rt')" class="mt-1" />
+                        </div>
+                        <div>
+                            <x-input-label for="rw" class="mb-2" :value="__('RW')" />
+                            <x-text-input id="rw" name="rw" class="w-full" />
+                            <x-input-error :messages="$errors->storeResident->get('rw')" class="mt-1" />
                         </div>
                     </div>
-                    <dl>
-                        <dt class="mb-2 font-semibold leading-none text-gray-900 ">Details</dt>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5">3.8GHz
-                            8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4
-                            memory, Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage, Gigabit Ethernet,
-                            Magic Mouse 2, Magic Keyboard - US.</dd>
-                        <dt class="mb-2 font-semibold leading-none text-gray-900">Category</dt>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 ">Electronics/PC</dd>
-                    </dl>
                 </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:px-6">
+                    <button type="submit"
+                        class="text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                        <x-svgs.plus class="mr-2 fill-white" />
+                        {{ __('Add') }}
+                    </button>
+                </div>
+            </form>
+        </x-modal>
+
+        <x-modal name="preview-resident-record" focusable>
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 space-y-4 text-left">
+                <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        {{ __('Preview') . ' ' . __('Resident Records') }}
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                        x-on:click="$dispatch('close-modal', 'preview-resident-record')">
+                        <x-svgs.xmark />
+                    </button>
+                </div>
+                <p class="text-gray-700">
+                    <strong>{{ __('Name') }}:</strong>
+                    <span x-text="resident.name"></span>
+                </p>
+                <p class="text-gray-700">
+                    <strong>{{ __('Birth Date') }}:</strong>
+                    <span x-text="resident.birth_date"></span>
+                </p>
+                <p class="text-gray-700">
+                    <strong>{{ __('RT') }}:</strong>
+                    <span x-text="resident.rt"></span>
+                </p>
+                <p class="text-gray-700">
+                    <strong>{{ __('RW') }}:</strong>
+                    <span x-text="resident.rw"></span>
+                </p>
             </div>
-        </div>
+            <div class="bg-gray-50 px-4 py-3 sm:flex sm:px-6">
+                <button type="button"
+                    class="text-gray-700 inline-flex items-center bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition"
+                    x-on:click="$dispatch('close-modal', 'preview-resident-record')">
+                    {{ __('Close') }}
+                </button>
+            </div>
+        </x-modal>
     </section>
 </x-dashboard-layout>
