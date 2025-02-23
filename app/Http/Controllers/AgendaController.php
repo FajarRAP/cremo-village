@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $agendas = Agenda::query();
+
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $agendas->where('title', 'like', "%$keyword%");
+        }
+
         return view('dashboard.agenda.index', [
-            'agendas' => Agenda::orderByDesc('date')->paginate(10)
+            'agendas' => $agendas->orderByDesc('date')->paginate(10)->appends($request->query()),
         ]);
     }
 
@@ -23,7 +30,7 @@ class AgendaController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validateWithBag('storeAgenda', [
             'title' => 'required',
             'description' => 'required',
             'date' => 'required',
@@ -49,7 +56,7 @@ class AgendaController extends Controller
         return redirect(route('dashboard.agendas', absolute: false));
     }
 
-    public function delete(Agenda $agenda)
+    public function destroy(Agenda $agenda)
     {
         $agenda->delete();
 
