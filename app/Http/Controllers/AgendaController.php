@@ -9,9 +9,8 @@ class AgendaController extends Controller
 {
     public function index()
     {
-        $agendas = Agenda::paginate(10);
         return view('dashboard.agenda.index', [
-            'agendas' => $agendas
+            'agendas' => Agenda::orderByDesc('date')->paginate(10)
         ]);
     }
 
