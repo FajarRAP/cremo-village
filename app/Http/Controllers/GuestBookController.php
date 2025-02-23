@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 
 class GuestBookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $guestbooks = GuestBook::query();
 
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $guestbooks->where('name', 'like', "%$keyword%");
+        }
+
         return view('dashboard.guest-book.index', [
-            'guestbooks' => $guestbooks->paginate(10),
+            'guestbooks' => $guestbooks->paginate(10)->appends($request->query()),
         ]);
     }
 
@@ -40,7 +45,7 @@ class GuestBookController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validateWithBag('storeGuestBook', [
             'name' => 'required',
             'origin' => 'required',
             'visit_date' => 'required',
@@ -53,7 +58,7 @@ class GuestBookController extends Controller
         return redirect(route('dashboard.guest-book', absolute: false));
     }
 
-    public function delete(GuestBook $guestbook)
+    public function destroy(GuestBook $guestbook)
     {
         $guestbook->delete();
 
