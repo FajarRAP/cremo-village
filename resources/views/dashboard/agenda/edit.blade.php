@@ -23,7 +23,8 @@
                 </div>
                 <div>
                     <x-input-label for="date" class="mb-2" :value="__('Date')" />
-                    <x-text-input id="date" name="date" class="w-full" :value="$agenda->date" />
+                    <x-text-input id="date" name="date" class="w-full" type="datetime-local"
+                        :value="$agenda->date" />
                     <x-input-error :messages="$errors->get('date')" class="mt-1" />
                 </div>
                 <div>
