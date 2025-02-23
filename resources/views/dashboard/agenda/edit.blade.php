@@ -3,13 +3,15 @@
         <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold text-gray-900">{{ __('Edit') . ' ' . __('Agenda') }}</h2>
-                <form action="{{ route('agenda.delete', ['agenda' => $agenda]) }}" method="POST">
+                <form action="{{ route('agenda.destroy', ['agenda' => $agenda]) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <x-error-button>
-                        <x-svgs.trash type="submit" class="mr-2 fill-white" />
-                        {{ __('Delete') . ' ' . __('Data') }}
-                    </x-error-button>
+                    <a href="{{ route('agenda.destroy', ['agenda' => $agenda]) }}">
+                        <x-error-button onclick="event.preventDefault(); this.closest('form').submit();">
+                            <x-svgs.trash type="submit" class="mr-2 fill-white" />
+                            {{ __('Delete') . ' ' . __('Data') }}
+                        </x-error-button>
+                    </a>
                 </form>
             </div>
             <form action="{{ route('agenda.update', ['agenda' => $agenda]) }}" method="POST"

@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <x-modal name="add-agenda" focusable>
+        <x-modal name="add-agenda" :show="$errors->storeAgenda->isNotEmpty()" focusable>
             <form action="{{ route('agenda.store') }}" method="POST" class="text-left">
                 @csrf
                 @method('POST')
@@ -105,18 +105,22 @@
                     <div>
                         <x-input-label for="title" class="mb-2" :value="__('Title')" />
                         <x-text-input id="title" name="title" class="w-full" />
+                        <x-input-error :messages="$errors->storeAgenda->get('title')" class="mt-1" />
                     </div>
                     <div>
                         <x-input-label for="date" class="mb-2" :value="__('Date')" />
                         <x-text-input id="date" name="date" class="w-full" type="datetime-local" />
+                        <x-input-error :messages="$errors->storeAgenda->get('date')" class="mt-1" />
                     </div>
                     <div>
                         <x-input-label for="location" class="mb-2" :value="__('Location')" />
                         <x-text-input id="location" name="location" class="w-full" />
+                        <x-input-error :messages="$errors->storeAgenda->get('location')" class="mt-1" />
                     </div>
                     <div>
                         <x-input-label for="description" class="mb-2" :value="__('Description')" />
                         <x-x-text-area-input id="description" name="description" class="w-full" rows="5" />
+                        <x-input-error :messages="$errors->storeAgenda->get('description')" class="mt-1" />
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:px-6">
