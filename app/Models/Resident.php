@@ -9,9 +9,11 @@ class Resident extends Model
 {
     protected $fillable = [
         'name',
+        'gender',
+        'birth_date',
         'rt',
         'rw',
-        'birth_date',
+        'marriage',
     ];
 
     /**

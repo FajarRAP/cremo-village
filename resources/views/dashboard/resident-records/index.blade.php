@@ -31,9 +31,11 @@
                             <tr>
                                 <th scope="col" class="px-4 py-4">#</th>
                                 <th scope="col" class="px-4 py-4">{{ __('Name') }}</th>
+                                <th scope="col" class="px-4 py-4">{{ __('Gender') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('Birth Date') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('RT') }}</th>
                                 <th scope="col" class="px-4 py-3">{{ __('RW') }}</th>
+                                <th scope="col" class="px-4 py-3">{{ __('Marriage') }}</th>
                                 <th scope="col" class="px-4 py-3"></th>
                             </tr>
                         </thead>
@@ -44,9 +46,11 @@
                                         {{ $loop->index + 1 }}
                                     </th>
                                     <td class="px-4 py-3">{{ $resident->name }}</td>
+                                    <td class="px-4 py-3">{{ $resident->gender }}</td>
                                     <td class="px-4 py-3">{{ date_format($resident->birth_date, 'd/m/o') }}</td>
                                     <td class="px-4 py-3">{{ $resident->rt }}</td>
                                     <td class="px-4 py-3">{{ $resident->rw }}</td>
+                                    <td class="px-4 py-3">{{ $resident->marriage }}</td>
                                     <td class="px-4 py-3">
                                         <x-dropdown>
                                             <x-slot name="trigger">

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('gender', ['Laki-laki', 'Perempuan']);
+            $table->dateTime('birth_date');
             $table->integer('rt');
             $table->integer('rw');
-            $table->date('birth_date');
+            $table->enum('marriage', ['Kawin', 'Belum Kawin', 'Cerai Hidup', 'Cerai Mati']);
             $table->timestamps();
         });
     }
