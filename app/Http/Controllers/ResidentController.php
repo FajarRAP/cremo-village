@@ -18,7 +18,7 @@ class ResidentController extends Controller
         }
 
         return view('dashboard.resident-records.index', [
-            'residents' => $residents->paginate(10)
+            'residents' => $residents->paginate(10)->appends($request->query()),
         ]);
     }
 
@@ -28,10 +28,9 @@ class ResidentController extends Controller
             'resident' => $resident
         ]);
     }
-
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validateWithBag('storeResident', [
             'name' => 'required',
             'rt' => 'required',
             'rw' => 'required',
@@ -42,6 +41,7 @@ class ResidentController extends Controller
 
         return redirect(route('dashboard.resident-records', absolute: false));
     }
+
 
     public function update(Request $request, Resident $resident)
     {
@@ -57,7 +57,7 @@ class ResidentController extends Controller
         return redirect(route('dashboard.resident-records', absolute: false));
     }
 
-    public function delete(Resident $resident)
+    public function destroy(Resident $resident)
     {
         $resident->delete();
 
