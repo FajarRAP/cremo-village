@@ -44,7 +44,7 @@
 
     <div class="fixed inset-0 z-60 w-screen overflow-y-auto" x-show="show">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+            <div class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all w-full {{ $maxWidth }} sm:mx-auto"
                 x-show="show" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
