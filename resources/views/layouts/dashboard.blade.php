@@ -7,43 +7,44 @@
                     class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100">
                     <x-svgs.bars class="!text-gray-900" />
                 </button>
-                <span class="self-center text-2xl font-semibold whitespace-nowrap">Dusun
-                    Cremo</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">
+                    Dusun Cremo</span>
             </div>
-            <div class="flex items-center lg:order-2">
-                <button type="button"
-                    class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
-                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
-                        alt="user photo" />
-                </button>
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button type="button"
+                        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                            alt="user photo" />
+                    </button>
+                </x-slot>
 
-                <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow rounded-xl"
-                    id="dropdown">
+                <x-slot name="content">
                     <div class="py-3 px-4">
                         <span class="block text-sm font-semibold text-gray-900">{{ auth()->user()->name }}</span>
                         <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->email }}</span>
                     </div>
                     <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
                         <li>
-                            <a href="{{ route('profile.edit') }}"
-                                class="block py-2 px-4 text-sm hover:bg-gray-100">{{ __('Account settings') }}</a>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Account settings') }}
+                            </x-dropdown-link>
                         </li>
                     </ul>
                     <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); this.closest('form').submit();"
-                                    class="block py-2 px-4 text-sm hover:bg-gray-100 hover:rounded-b-lg">{{ __('Log out') }}</a>
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    {{ __('Log out') }}
+                                </x-dropdown-link>
                             </form>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </x-slot>
+            </x-dropdown>
         </div>
     </nav>
 
