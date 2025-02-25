@@ -23,7 +23,7 @@ class HomeController extends Controller
         $female_count = $residents->where('gender', '=', 'Perempuan')->count();
 
         return view('home', [
-            'ratio' => $this->simplifyRatio($male_count, $female_count),
+            'ratio' =>  $this->simplifyRatio($male_count, $female_count),
             'resident_count' => $residents->count(),
             'male_count' => $male_count,
             'female_count' => $female_count,
@@ -33,6 +33,7 @@ class HomeController extends Controller
 
     private function greatestCommonDivisor(int $a, int $b)
     {
+        if ($a <= 0 || $b <= 0) return 0;
         $remainder = -1;
 
         while (($a % $b) > 0) {
@@ -47,6 +48,7 @@ class HomeController extends Controller
     private function simplifyRatio(int $a, int $b)
     {
         $gcd = $this->greatestCommonDivisor($a, $b);
+        if ($gcd <= 0) return '0:0';
 
         return $a / $gcd . ':' . $b / $gcd;
     }
